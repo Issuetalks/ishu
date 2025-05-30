@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Queen! 👑</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff6b8b;
+            --secondary: #ffb8c6;
+            --dark: #3a0c3b;
+            --light: #fff5f7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4rem;
+            background: linear-gradient(45deg, var(--primary), #ff2d62);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--dark);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Slideshow */
+        .slideshow-container {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(210, 54, 105, 0.3);
+        }
+
+        .slide {
+            display: none;
+            position: relative;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(58, 12, 59, 0.8);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .slide-nav {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .slide-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .slide-dot.active {
+            background: var(--primary);
+        }
+
+        /* Love Meter */
+        .love-meter {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .meter-container {
+            width: 100%;
+            height: 40px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            margin: 1rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .meter-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #ff6b8b, #ff2d62);
+            border-radius: 20px;
+            transition: width 2s ease-in-out;
+        }
+
+        .meter-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::after {
+            right: -12px;
+        }
+
+        .right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Message Decoder */
+        .decoder {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .decoder-input {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .decoder-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 1rem 0;
+        }
+
+        .decoder-btn:hover {
+            background: #ff2d62;
+            transform: translateY(-3px);
+        }
+
+        .decoded-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+            display: none;
+        }
+
+        /* Music Player */
+        .music-player {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .player-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        /* Love Letter */
+        .love-letter {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 80%;
+            max-width: 600px;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            transition: transform 0.5s ease;
+        }
+
+        .love-letter.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .letter-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            opacity: 0;
+            z-index: 999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline::before {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .left::after,
+            .right::after {
+                left: 21px;
+            }
+
+            .right {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Happy Birthday, SWATI!</h1>
+            <p class="subtitle">Every day with you is a blessing,I don't deserve</p>
+        </header>
+
+        <!-- Photo Slideshow -->
+        <div class="slideshow-container">
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    alt="Us together">
+                <div class="slide-caption">The day we first met - my life changed forever</div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    alt="Our first date">
+                <div class="slide-caption">Our first date - I knew you were special</div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    alt="Vacation">
+                <div class="slide-caption">Our amazing vacation - just us against the world</div>
+            </div>
+            <div class="slide-nav">
+                <span class="slide-dot active"></span>
+                <span class="slide-dot"></span>
+                <span class="slide-dot"></span>
+            </div>
+        </div>
+
+        <!-- Love Meter -->
+        <div class="love-meter">
+            <h2>How Much I Love You</h2>
+            <p>Click the button to measure my infinite love for you</p>
+            <button id="loveMeterBtn" class="decoder-btn">Measure Love</button>
+            <div class="meter-container">
+                <div class="meter-fill" id="meterFill"></div>
+                <div class="meter-text" id="meterText">0%</div>
+            </div>
+        </div>
+
+        <!-- Memory Timeline -->
+        <div class="timeline">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Our Journey Together</h2>
+
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>First Meeting</h3>
+                    <p>That day at school, when you were drawing on paper in the classroom and that was my first time i
+                        notices you.</p>
+                    <small>aguest 12, 2020</small>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>First Date</h3>
+                    <p>first date per toh gye he nhii...humdono but i would love to go on a date.</p>
+                    <small>till waiting</small>
+                </div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>First "I Love You"</h3>
+                    <p>It was u i knw who messaged me...and somehow i show ki...tm i love you likhi thi....ab jhuut mt
+                        bolna!!</p>
+                    <small>September 18, 2020</small>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>Our First Trip</h3>
+                    <p>ya bhii krna ha...toh loli i'm waiting for this tooo.</p>
+                    <small>agian till waiting<b>(srry still* hogya till likh diya)</b></small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Decoder -->
+        <div class="decoder">
+            <h2>Secret Message Decoder</h2>
+            <p>Enter the password to reveal a special message</p>
+            <p><small>(Hint: your name + "love")</small></p>
+            <input type="text" class="decoder-input" id="decoderInput" placeholder="Enter password...">
+            <button class="decoder-btn" id="decoderBtn">Decode Message</button>
+            <div class="decoded-message" id="decodedMessage">
+                <h3>My Secret Message For You</h3>
+                <p><b>party kb de rhi ha...just kidding</b>You’re honestly the most incredible person I’ve ever
+                    met—like, how are you even real(bhootni)? Every
+                    single
+                    day with you feels like winning the lottery, except instead of money, I get your weird obsession
+                    with [behanchod], and that laugh of yours that makes my
+                    chest ache in the best way.</p>
+            </div>
+        </div>
+
+        <!-- Music Player -->
+        <div class="music-player">
+            <h2>Our Song</h2>
+            <p>Click play to listen to the song that reminds me of <b>you</b></p>
+            <div class="player-controls">
+                <button class="player-btn" id="playBtn"><i class="fas fa-play"></i></button>
+                <button class="player-btn" id="pauseBtn"><i class="fas fa-pause"></i></button>
+                <button class="player-btn" id="stopBtn"><i class="fas fa-stop"></i></button>
+            </div>
+            <audio id="ourSong" src="practice.2025/Billie Eilish - Ocean Eyes (Lyrics)-yt.savetube.me.mp3"></audio>
+        </div>
+
+        <!-- Love Letter Button -->
+        <button class="decoder-btn" id="letterBtn" style="display: block; margin: 3rem auto;">Open My Love
+            Letter</button>
+
+        <footer style="text-align: center; margin-top: 3rem; padding: 2rem; color: #666;">
+            Made with <i class="fas fa-heart" style="color: var(--primary);"></i> by Ishu(daddy bolna abse😂😂)
+        </footer>
+    </div>
+
+    <!-- Love Letter Popup -->
+    <div class="overlay" id="overlay"></div>
+    <div class="love-letter" id="loveLetter">
+        <button class="letter-close" id="letterClose">&times;</button>
+        <h2>My Dearest Love,</h2>
+        <p>As I sit here on your birthday, just thinking about you, I realize how incredibly lucky I am that you're in
+            my life. Seriously, what did I do to deserve someone as amazing as you.</p>
+        <p>Remember when we first met? I tried to play it cool, but inside I was a complete mess - your smile literally
+            made me forget how to form sentences. And now, all these little things - the way you laugh until you snort,
+            how you get that cute wrinkle between your eyebrows when you're concentrating, even how you use tapori
+            language - they're my favorite parts of life.</p>
+        <p>This past year with you has been... everything. The lazy Sundays, the spontaneous works , even the times
+            we argued about not giving time to eachother - I wouldn't change a second of it. You've been my partner in
+            crime, my shoulder to lean on, and somehow you still put up with my terrible/bakwass jokes.</p>
+        <p>I promise to keep trying to be the man you deserve - even when I forget to take care of myself or leave your
+            on read . And I'll spend every birthday reminding you how extraordinary you are, because you should
+            never doubt how deeply loved you are.</p>
+        <p>Happy birthday to the woman who makes my world brighter just by being in it. I love you more than ronaldo(and
+            you know how much that means coming from me).
+        <p><b>kuch jada he bara hogya...!!😂😂</b></p>
+        </p>
+        <p style="margin-top: 2rem;">Forever yours,</p>
+        <p><b>ishu 😂</b></p>
+    </div>
+
+    <script>
+        // Slideshow
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slide-dot');
+
+        function showSlides() {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Remove active class from all dots
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+
+            // Increment index and reset if needed
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+
+            // Show current slide and dot
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
+
+            // Change slide every 5 seconds
+            setTimeout(showSlides, 5000);
+        }
+
+        // Manual slide navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                slideIndex = index;
+
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+
+                dots.forEach(d => {
+                    d.classList.remove('active');
+                });
+
+                slides[index].classList.add('active');
+                dot.classList.add('active');
+            });
+        });
+
+        // Start slideshow
+        showSlides();
+
+        // Love Meter
+        document.getElementById('loveMeterBtn').addEventListener('click', function () {
+            const meterFill = document.getElementById('meterFill');
+            const meterText = document.getElementById('meterText');
+
+            // Reset meter
+            meterFill.style.width = '0%';
+            meterText.textContent = '0%';
+
+            // Animate meter
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    meterText.textContent = '∞% (Infinite Love)';
+                } else {
+                    width++;
+                    meterFill.style.width = width + '%';
+                    meterText.textContent = width + '%';
+                }
+            }, 20);
+
+            // Create confetti when complete
+            setTimeout(createConfetti, 2500);
+        });
+
+        // Message Decoder
+        document.getElementById('decoderBtn').addEventListener('click', function () {
+            const input = document.getElementById('decoderInput').value.toLowerCase();
+            const message = document.getElementById('decodedMessage');
+
+            // Replace "hername" with your girlfriend's name
+            if (input.includes('swati') && input.includes('love')) {
+                message.style.display = 'block';
+                createConfetti();
+            } else {
+                alert('Incorrect password! Try again.');
+            }
+        });
+
+        // Music Player
+        const audio = document.getElementById('ourSong');
+
+        document.getElementById('playBtn').addEventListener('click', function () {
+            audio.play();
+        });
+
+        document.getElementById('pauseBtn').addEventListener('click', function () {
+            audio.pause();
+        });
+
+        document.getElementById('stopBtn').addEventListener('click', function () {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+
+        // Love Letter
+        const letterBtn = document.getElementById('letterBtn');
+        const letterClose = document.getElementById('letterClose');
+        const loveLetter = document.getElementById('loveLetter');
+        const overlay = document.getElementById('overlay');
+
+        letterBtn.addEventListener('click', function () {
+            loveLetter.classList.add('active');
+            overlay.classList.add('active');
+            createConfetti();
+        });
+
+        letterClose.addEventListener('click', function () {
+            loveLetter.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', function () {
+            loveLetter.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Confetti Effect
+        function createConfetti() {
+            const colors = ['#ff6b8b', '#ff8e9e', '#ffb8c6', '#ff2d62', '#d23669'];
+
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+
+                    // Random properties
+                    const size = Math.random() * 10 + 5;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const left = Math.random() * window.innerWidth;
+
+                    confetti.style.width = size + 'px';
+                    confetti.style.height = size + 'px';
+                    confetti.style.backgroundColor = color;
+                    confetti.style.left = left + 'px';
+                    confetti.style.top = '-10px';
+                    confetti.style.opacity = '1';
+
+                    // Random animation duration
+                    const duration = Math.random() * 3 + 2;
+                    confetti.style.animation = `fall ${duration}s linear forwards`;
+
+                    document.body.appendChild(confetti);
+
+                    // Remove after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, duration * 1000);
+                }, i * 20);
+            }
+        }
+
+        // Add falling animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    color: rgb(189, 20, 20);
+}
+
+P {
+    color: red;
+    font-style: italic;
+    font-size: medium;
+}
+
+ul {
+    color: aliceblue;
+}
+
+hr {
+    coloR: black;
+}
+
+p1 {
+    color: red;
+    font-style: italic;
+    font-size: medium;
+}
+
+.click-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #130909, #686b6b);
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.click-button:hover {
+    background: linear-gradient(45deg, #150b16, #585a5a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.click-button:active {
+    transform: translateY(1px);
+}
+
+aside {
+    width: 86%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    float: right;
+    box-shadow: inset 5px 0 5px -5px black;
+    font-style: italic;
+    color: black;
+}
+
+aside {
+    margin: 0.5rem;
+}
+
+#playButton {
+    /* Shape & Size */
+    border-radius: 16px;
+    /* Slightly rounded rectangle */
+    padding: 10px 20px;
+    /* Compact size */
+    width: 160px;
+    /* Fixed width */
+
+    /* Color - Modern gradient */
+    background: linear-gradient(135deg, #442461, #312941);
+    /* Purple gradient */
+
+    /* Text & Font */
+    color: white;
+    font-size: 14px;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
+    /* Border & Effects */
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(142, 45, 226, 0.3);
+
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Hover effect */
+#playButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(142, 45, 226, 0.4);
+}
+
+/* Active state */
+#playButton:active {
+    transform: translateY(1px);
+}
+
+/* Playing state */
+.playing {
+    background: linear-gradient(135deg, #00b09b, #96c93d);
+    /* Green gradient */
+    box-shadow: 0 4px 8px rgba(0, 176, 155, 0.3);
+}
+
+.playing:hover {
+    box-shadow: 0 6px 12px rgba(0, 176, 155, 0.4);
+}
+
+/* Music note icon */
+.music-icon {
+    background-color: black;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+/* Small pulse animation when playing */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.playing .music-icon {
+    animation: pulse 1.5s infinite;
+}
